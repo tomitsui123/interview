@@ -1,0 +1,256 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Swagger Catcher game",
+    "description": "Tommy's catcher game API in the swagger-2.0 specification",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "name": "Tommy"
+    },
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "host": "localhost:8081",
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "Show the top 100 players",
+        "operationId": "showTopPlayers",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "schema": {
+              "$ref": "#/definitions/Top100PlayerList"
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Creates a new session for clients.",
+        "operationId": "createToken",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "schema": {
+              "$ref": "#/definitions/Session"
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "get": {
+        "description": "Returns a session based on a ID.",
+        "operationId": "findSessionById",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of session to fetch",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "session response",
+            "schema": {
+              "$ref": "#/definitions/LeaderboardData"
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Edit a session based on the ID",
+        "operationId": "editSessionById",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of session to fetch",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "description": "The highest score of the player",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The username of the player"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "session response",
+            "schema": {
+              "$ref": "#/definitions/EditModel"
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "403": {
+            "description": "The session has been registered",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Session": {
+      "type": "object",
+      "allOf": [
+        {
+          "properties": {
+            "token": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "Top100PlayerList": {
+      "type": "object",
+      "allOf": [
+        {
+          "properties": {
+            "result": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LeaderboardData"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "LeaderboardData": {
+      "type": "object",
+      "allOf": [
+        {
+          "required": [
+            "id"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "count": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        }
+      ]
+    },
+    "entity": {
+      "type": "object",
+      "allOf": [
+        {
+          "required": [
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        }
+      ]
+    },
+    "NewEntity": {
+      "type": "object",
+      "required": [
+        "isRecord"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer"
+        }
+      }
+    },
+    "EditMessage": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "ErrorModel": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
