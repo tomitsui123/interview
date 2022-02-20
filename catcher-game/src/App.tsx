@@ -4,7 +4,6 @@ import {
   Routes,
 } from 'react-router-dom'
 import GameWrapper from './components/catcher/GameWrapper'
-import Game from './components/Game'
 import Header from './components/Header'
 import Leaderboard from './components/Leaderboard'
 import CreateNewRecordCanvas from './components/leaderboard/CreateNewRecordCanvas'
