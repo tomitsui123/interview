@@ -1,0 +1,11 @@
+export const STAGE_WIDTH = 390
+export const STAGE_HEIGHT = 640
+export const IMAGE_WIDTH = 60
+export const MOVE_SPEED = 5
+export const DROPPING_SPEED = 24
+export const DROPPING_DISTANCE = 5
+export const CATCHER_TOP = 600
+export const CONTROLLER_HEIGHT = 100
+export const ARROW_LEFT = 'ArrowLeft'
+export const ARROW_RIGHT = 'ArrowRight'
+export const GAME_TIME = 60

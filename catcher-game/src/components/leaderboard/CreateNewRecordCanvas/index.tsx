@@ -16,7 +16,6 @@ const CreateNewRecordCanvas = () => {
     setData(res.data)
   }
   const handleSubmit = () => {
-    console.log('fuck')
     navigate('/leaderboard')
   }
   return (

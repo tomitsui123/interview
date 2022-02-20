@@ -3,6 +3,7 @@ import {
   Route,
   Routes,
 } from 'react-router-dom'
+import GameWrapper from './components/catcher/GameWrapper'
 import Game from './components/Game'
 import Header from './components/Header'
 import Leaderboard from './components/Leaderboard'
@@ -14,7 +15,7 @@ const App = () => {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path='/' element={<Game />} />
+          <Route path='/' element={<GameWrapper />} />
           <Route
             path='/leaderboard'
             element={<Leaderboard />}
