@@ -8,7 +8,7 @@
 
 ## API doc (Swagger)
 All the APIs have been listed in Swagger. 
-Open [http://localhost:13000](http://localhost:13000) to view it in the browser.
+Open [http://localhost:18082/api-docs/](http://localhost:18082/api-docs/) to view it in the browser.
 
 ## Install docker & docker-compose
 ### Linux
