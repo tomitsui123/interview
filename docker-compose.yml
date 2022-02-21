@@ -7,7 +7,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: sandboxVR
       MONGO_INITDB_DATABASE: catcher
     ports:
-     - 27017:27017
+      - 27017:27017
   backend:
     build:
       context: ./backend
@@ -24,7 +24,7 @@ services:
       - mongodb
   frontend:
     build:
-      context: ./frontend
+      context: ./catcher-game
     ports:
       - 13000:3000
     links:
