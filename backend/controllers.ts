@@ -42,12 +42,13 @@ const editSession = async ({
 
 const createRandomRecord = async () => {
   const randomRecordList = []
+  const randomList = [-250, -100,-50,0,100,50,250,300,450,600,400]
   for (var i = 0; i < 100; i++) {
     const now = new Date()
     const token = await KSUID.random(now.getTime())
     randomRecordList.push({
       token: token.string,
-      count: Math.round(Math.random() * 500),
+      count: randomList[Math.floor(Math.random() * randomList.length)],
       name: randomName({ random: Math.random }),
     })
   }

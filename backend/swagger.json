@@ -153,6 +153,29 @@
           }
         }
       }
+    },
+    "random": {
+      "post": {
+        "description": "Generate 100 leaderboard data randomly",
+        "operationId": "generateRandomData",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "schema": {
+              "$ref": "#/definitions/GenerateRandomDataResponse"
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -244,6 +267,17 @@
       "type": "object",
       "required": [
         "code",
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "GenerateRandomDataResponse": {
+      "type": "object",
+      "required": [
         "message"
       ],
       "properties": {
