@@ -22,10 +22,10 @@ services:
       - 18082:8081
     depends_on:
       - mongodb
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #   ports:
-  #     - 13000:3000
-  #   links:
-  #     - 'backend-consensys:be'
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - 13000:3000
+    links:
+      - 'backend:be'
