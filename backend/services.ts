@@ -1,10 +1,10 @@
 import { MongoClient } from 'mongodb'
 
-const host = 'localhost' || process.env.DATABASE_HOST
-const port = 27017 || process.env.DATABASE_PORT
-const database = 'catcher' || process.env.DATABASE
-const username = 'root' || process.env.DB_USERNAME
-const password = 'sandboxVR' || process.env.DB_PASSWORD
+const host = process.env.DATABASE_HOST || 'localhost'
+const port = process.env.DATABASE_PORT || 27017
+const database = process.env.DATABASE || 'catcher'
+const username = process.env.DB_USERNAME || 'root'
+const password = process.env.DB_PASSWORD || 'sandboxVR'
 const connectionUri = `mongodb://${username}:${password}@${host}:${port}`
 
 const getTop100List = async () => {
