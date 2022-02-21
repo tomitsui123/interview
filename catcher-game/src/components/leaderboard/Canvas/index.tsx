@@ -2,22 +2,25 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import {
   Card,
+  Col,
+  Container,
   ListGroup,
   Pagination,
+  Row,
 } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { useInterval } from '../../../hooks/useInterval'
 import LeaderboardEntity, {
   ILeaderboardEntity,
 } from '../LeaderboardEntity'
-import './index.css'
 
 const TOTAL_DATA_AMOUNT = 100
 const SHOW_ROW = 20
 
 const Canvas = () => {
   const { token } = useParams()
-  const [currentData, setCurrentData] = useState<ILeaderboardEntity>()
+  const [currentData, setCurrentData] =
+    useState<ILeaderboardEntity>()
   const [leaderboardData, setLeaderboardData] = useState<
     ILeaderboardEntity[]
   >([])
@@ -47,7 +50,11 @@ const Canvas = () => {
   }, [token])
 
   const paginationItems = []
-  for (var i = 1; i <= TOTAL_DATA_AMOUNT / SHOW_ROW; i++) {
+  for (
+    var i = 1;
+    i <= leaderboardData.length / SHOW_ROW;
+    i++
+  ) {
     paginationItems.push(
       <Pagination.Item
         onClick={(event) => {
@@ -67,13 +74,18 @@ const Canvas = () => {
   }
 
   return (
-    <div className='canvas'>
+    <div style={{ textAlign: 'center' }}>
       <h1>Top 100 player</h1>
       <br />
-      {currentData && <h5>
-        Hi {currentData?.name}, your rank is {2}
-      </h5>}
-      <Card style={{ width: '18rem' }}>
+      <Pagination
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        {paginationItems}
+      </Pagination>
+      <Card style={{ width: '18rem', margin: '0 auto' }}>
         <ListGroup as='ol' variant='flush'>
           {leaderboardData
             .slice(
@@ -83,6 +95,7 @@ const Canvas = () => {
             .map((e, idx) => (
               <>
                 <LeaderboardEntity
+                  isHighlight={e.name === currentData?.name}
                   rank={
                     SHOW_ROW * (pagination - 1) + idx + 1
                   }
@@ -93,7 +106,6 @@ const Canvas = () => {
             ))}
         </ListGroup>
       </Card>
-      <Pagination>{paginationItems}</Pagination>
     </div>
   )
 }

@@ -5,10 +5,8 @@ import {
 } from '../../../../constants'
 import { ICatcher } from '../../../../hooks/useCatcher'
 import catcherImg from '../../../../img/boat.png'
-import { GameContext } from '../GameContext'
 
 const TheCatcher = ({ catcher }: { catcher: ICatcher }) => {
-  // const { catcher } = useContext(GameContext)
   return (
     <img
       style={{

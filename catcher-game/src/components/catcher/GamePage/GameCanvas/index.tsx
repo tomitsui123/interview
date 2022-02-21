@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useEffect } from 'react'
 import styled from 'styled-components'
 import {
@@ -28,11 +29,18 @@ const GameCanvas = ({
   gameOver: boolean
 }) => {
   const [catcher, updateCatcherPos] = useCatcher()
-  const [droppingItem, resetDroppingItem, updateItemPos, clearDroppingItem] =
-    useDroppingItem()
+  const [
+    droppingItem,
+    resetDroppingItem,
+    updateItemPos,
+    clearDroppingItem,
+  ] = useDroppingItem()
   useEffect(() => {
-    resetDroppingItem()
+    setTimeout(() => {
+      resetDroppingItem()
+    }, 1000)
   }, [])
+
   const moveCatcher = (direction: number) => {
     updateCatcherPos(direction)
   }
