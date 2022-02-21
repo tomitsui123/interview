@@ -4,15 +4,18 @@ import './index.css'
 export interface ILeaderboardEntity {
   name: string
   count: number
-  rank?: number
+  rank?: number,
+  isHighlight: boolean
 }
 
 const LeaderboardEntity = ({
   rank,
   name,
   count,
+  isHighlight = false
 }: ILeaderboardEntity) => (
   <ListGroup.Item
+    variant={isHighlight ? 'primary' : 'light'}
     as='li'
     className='d-flex justify-content-between align-items-start'
   >
