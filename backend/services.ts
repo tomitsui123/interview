@@ -14,7 +14,7 @@ const getTop100List = async () => {
     const db = client.db('catcher')
     const collection = db.collection('leaderboard')
     const findCursor = await collection
-      .find()
+      .find({ name: { $ne: '' } })
       .sort({ count: -1 })
       .limit(100)
     let res = await findCursor.toArray()
@@ -22,7 +22,6 @@ const getTop100List = async () => {
       name: e.name,
       count: e.count,
     }))
-    console.log(top100List)
     return top100List
   } catch (e) {
     console.log(e)
@@ -61,11 +60,15 @@ const editSession = async ({ token, name, count }) => {
     }
     const data = await collection.findOne(condition)
     if (!data) throw new Error('not found')
+    let updatedField = {}
+    if (name) {
+      updatedField = { name }
+    } else if (count) {
+      updatedField = { count }
+    }
+
     await collection.updateOne(condition, {
-      $set: {
-        name,
-        count,
-      },
+      $set: updatedField,
     })
   } catch (e) {
     console.log(e)
